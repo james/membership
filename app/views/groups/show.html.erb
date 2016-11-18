@@ -1,0 +1,13 @@
+<h1><%= @group.name %></h1>
+
+<%= @group.people.count %>
+
+<h2>Emails:</h2>
+
+<ul>
+  <% @group.mailouts.each do |mailout| %>
+    <li><%= link_to mailout.subject, group_mailout_path(@group, mailout) %></li>
+  <% end %>
+</ul>
+
+<%= link_to "New email", new_group_mailout_path(@group) %>

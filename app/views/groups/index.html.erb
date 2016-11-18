@@ -1,0 +1,13 @@
+<table class="table">
+  <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.name %></td>
+      <td><%= pluralize(group.people.count, "person") %></td>
+      <% if current_user.admin? %>
+        <td><%= link_to pluralize(group.group_users.count, "Role Holder"), group_group_users_path(group) %>
+      <% end %>
+      <td><%= link_to "View", group_path(group) %>
+      <td><%= link_to "Edit", edit_group_path(group) %>
+    </tr>
+  <% end %>
+</table>

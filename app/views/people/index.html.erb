@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-4">
+    <%= form_for_filterrific @filterrific do |form| %>
+      <div class="form-group">
+        <%= form.label :by_name, "First Name" %>
+        <%= form.text_field :by_name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :by_membership_status  %>
+        <%= form.select :by_membership_status, [["Is member", "member"], ["Is not member", "notmember"]], {include_blank: true}, {class: 'form-control'} %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :born_after  %>
+        <%= form.text_field :born_after, class: 'datepicker form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :born_before  %>
+        <%= form.text_field :born_before, class: 'datepicker form-control'  %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :in_group %>
+        <%= form.select :in_group, current_user.viewable_groups.collect {|x| [x.name, x.id]}, {include_blank: true}, {class: 'form-control'} %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :within_bounds  %>
+        <%= render partial: 'map_filter' %>
+        <%= form.hidden_field :within_bounds  %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "Filter", class: 'btn btn-primary' %>
+        <%= link_to 'Reset filters', reset_filterrific_url, class: 'btn btn-default' %>
+      </div>
+
+    <% end %>
+
+    <% if current_user.admin? %>
+      <%= link_to "Create a group from this filter", new_group_path(filter: params[:filterrific].to_json) %>
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <h3><%= @people.total_count %> people found</h3>
+    <table class="table table-striped table-hover table-condensed">
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th></th>
+      </tr>
+      <% @people.each do |person| %>
+        <tr>
+          <td><%= person.id %></td>
+          <td><%= person.first_name %></td>
+          <td><%= person.last_name %></td>
+          <td><%= link_to "View", person_path(person) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @people %>
+  </div>
+</div>

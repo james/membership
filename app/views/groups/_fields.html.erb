@@ -1,0 +1,21 @@
+<div class="form-group">
+  <%= form.label :name %>
+  <%= form.text_field :name, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= form.label :description %>
+  <%= form.text_area :description, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= form.label :why_receiving %>
+  <p class="help-block">Members can often get confused about who is contacting them and why. This text will be at the bottom of emails to help explain.</p>
+  <div class="input-group">
+    <div class="input-group-addon">You received this email because </div>
+    <%= form.text_field :why_receiving, class: 'form-control', placeholder: 'you asked to hear about the NHS' %>
+  </div>
+</div>
+<div class="form-group">
+  <%= form.label :automatic_update %>
+  <p class="help-block">When new members join or update their details so that they meet your group's criteria, they can be automatically added to this group. <br />Do you want this?</p>
+  <%= form.check_box :automatic_update, class: 'form-control', checked: true, disabled: true %>
+</div>

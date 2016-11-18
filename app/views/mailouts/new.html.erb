@@ -1,0 +1,24 @@
+<h1>New Email</h1>
+
+<p>This email will be sent to the <%= @group.group_memberships.count %> members of the <%= @group.name %> group.</p>
+
+<%= form_for [@group, @mailout] do |form| %>
+  <div class="form-group">
+    <%= form.label :subject %>
+    <%= form.text_field :subject, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :body %>
+    <%= form.text_area :body, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :from_email %>
+    <%= form.text_field :from_email, value: current_user.email , class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<h2>Edit <%= @group.name %></h2>
+
+<%= form_for @group do |form| %>
+  <%= render partial: 'fields', locals: {form: form} %>
+
+  <div class="form-group">
+    <%= form.submit %>
+  </div>
+<% end %>

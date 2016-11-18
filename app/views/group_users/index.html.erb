@@ -1,0 +1,16 @@
+<h2>Group role holders</h2>
+
+<table class="table">
+  <% @group.group_users.each do |group_user| %>
+    <tr>
+      <td><%= group_user.user.email %></td>
+      <td><%= link_to "remove", group_group_user_path(@group, group_user), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= form_for [@group, GroupUser.new] do |form| %>
+  <%= form.label :user_id %>
+  <%= form.select :user_id, User.all.collect {|x| [x.email, x.id]} %>
+  <%= form.submit %>
+<% end %>
