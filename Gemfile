@@ -15,6 +15,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-datepicker-rails'
 gem 'font-awesome-sass',  '~> 4.3'
+gem "bootstrap_form", "~> 2.7"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -45,11 +46,14 @@ gem 'faker', '1.6.6'
 
 gem 'mailgun-ruby', require: 'mailgun'
 
+gem 'apartment'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'capybara'
   gem 'rspec-rails'
+  gem 'database_cleaner'
 end
 
 group :development do

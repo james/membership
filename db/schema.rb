@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018180841) do
+ActiveRecord::Schema.define(version: 20181009002528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(version: 20161018180841) do
     t.index ["user_id"], name: "index_mailouts_on_user_id", using: :btree
   end
 
+  create_table "organisations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "subdomain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "people", force: :cascade do |t|
     t.string    "first_name"
     t.string    "last_name"
@@ -74,8 +81,8 @@ ActiveRecord::Schema.define(version: 20161018180841) do
     t.string    "facebook_id"
     t.string    "twitter_login"
     t.date      "born_at"
-    t.datetime  "created_at",                                                                     null: false
-    t.datetime  "updated_at",                                                                     null: false
+    t.datetime  "created_at",                                                                        null: false
+    t.datetime  "updated_at",                                                                        null: false
     t.string    "address1"
     t.string    "address2"
     t.string    "city"
@@ -84,7 +91,7 @@ ActiveRecord::Schema.define(version: 20161018180841) do
     t.string    "post_code"
     t.decimal   "lat"
     t.decimal   "lng"
-    t.geography "lonlat",                limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.geography "lonlat",                limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.integer   "membership_id"
     t.datetime  "membership_started_at"
     t.string    "membership_level"
