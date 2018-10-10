@@ -10,14 +10,19 @@ RSpec.feature "Registering a new organisation", :type => :feature do
     Capybara.app_host = "http://app.lvh.me"
     Apartment::Tenant.switch! 'app'
   end
-  
+
   scenario "successfully" do
     visit "/"
     fill_in "Name", with: 'New Organisation'
     fill_in "Subdomain", with: 'new-organisation'
     click_button "Create Organisation"
-    expect(current_url).to eq('http://new-organisation.lvh.me/organisation/setup')
+    expect(current_url).to eq('http://new-organisation.lvh.me/organisation/first_user')
     expect(page).to have_content("Welcome to New Organisation")
+    fill_in "Email", with: 'test@abscond.org'
+    fill_in "Password", with: 'password'
+    fill_in "Password confirmation", with: 'password'
+    click_button "Create User"
+    expect(current_url).to eq('http://new-organisation.lvh.me/organisation/setup')
   end
 
   scenario "with invalid info" do

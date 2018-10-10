@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   constraints OrganisationDomain do
     resource :organisation, only: %w{edit update}, controller: 'organisation' do
       member do
+        get :first_user
+        post :create_admin
         get :setup
       end
     end

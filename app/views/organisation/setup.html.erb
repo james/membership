@@ -1,1 +1,9 @@
-<h1>Welcome to <%= @organisation.name %></h1>
+<h1>Welcome <%= current_user.email %></h1>
+<p>
+  You are now the admin of <%= @organisation.name %>. How would you like the
+  organisation to be setup?
+</p>
+
+<h2>Add your members</h2>
+
+<p>Allow members to sign up</p>

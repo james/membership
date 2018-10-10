@@ -1,0 +1,8 @@
+<h1>Welcome to <%= @organisation.name %></h1>
+
+<%= bootstrap_form_for @user, url: create_admin_organisation_path do |form| %>
+  <%= form.email_field :email %>
+  <%= form.password_field :password %>
+  <%= form.password_field :password_confirmation %>
+  <%= form.submit %>
+<% end %>

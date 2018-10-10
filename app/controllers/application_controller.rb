@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :check_for_setup
+  before_action :check_for_first_user
   before_action :authenticate_user!
   before_action :find_organisation
   protect_from_forgery with: :exception
@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_for_setup
-    if !public_site? && User.count == 0 && request.path != setup_organisation_path
-      redirect_to setup_organisation_path
+  def check_for_first_user
+    if !public_site? && User.count == 0
+      redirect_to first_user_organisation_path
     end
   end
 
