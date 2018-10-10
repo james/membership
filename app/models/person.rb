@@ -30,4 +30,8 @@ class Person < ApplicationRecord
       where("ST_Intersects(ST_GeomFromText(?), lonlat)", poly.geometry.as_text)
     end
   }
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -113,6 +113,7 @@ RSpec.configure do |config|
     DatabaseCleaner.start
     # Switch into the default tenant
     Apartment::Tenant.switch! 'app'
+    User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
   end
 
   config.after(:each) do

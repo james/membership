@@ -127,6 +127,8 @@ GEM
       kaminari (>= 0.13.0)
       rails
     kaminari-core (1.1.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -282,6 +284,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   kaminari-bootstrap (~> 3.0.1)
+  launchy
   listen (~> 3.0.5)
   mailgun-ruby
   pg (~> 0.18)

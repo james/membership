@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         get :setup
       end
     end
-    devise_for :users
+    devise_for :users, controllers: { registrations: 'users/registrations' }
     resources :people
     resources :groups do
       resources :group_users

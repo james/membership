@@ -112,7 +112,9 @@ ActiveRecord::Schema.define(version: 20181009002528) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "role"
+    t.integer  "person_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["person_id"], name: "index_users_on_person_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -122,4 +124,5 @@ ActiveRecord::Schema.define(version: 20181009002528) do
   add_foreign_key "group_users", "users"
   add_foreign_key "mailouts", "groups"
   add_foreign_key "mailouts", "users"
+  add_foreign_key "users", "people"
 end

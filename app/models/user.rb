@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
   has_many :group_memberships, through: :groups
   has_many :people, through: :group_memberships
+  belongs_to :person
+  accepts_nested_attributes_for :person
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
