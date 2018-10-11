@@ -1,9 +1,14 @@
-<h2>Create a new group with <%= @group.people_by_filter.count %> people in it</h2>
+<h2>
+  Create a new group
+  <% if @group.filter? %>
+    with <%= @group.people_by_filter.count %> people in it
+  <% end %>
+</h2>
 
 <%= form_for @group do |form| %>
   <%= form.hidden_field :filter, value: params[:filter] %>
 
-  <%= render partial: 'fields', locals: {form: form} %>
+  <%= render 'fields', form: form %>
 
   <div class="form-group">
     <%= form.submit %>

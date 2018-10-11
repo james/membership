@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181010135602) do
+ActiveRecord::Schema.define(version: 20181011220900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,11 @@ ActiveRecord::Schema.define(version: 20181010135602) do
     t.integer  "group_id"
     t.integer  "user_id"
     t.string   "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "can_manage_members", default: true
+    t.boolean  "is_public",          default: true
+    t.boolean  "can_manage_group",   default: true
     t.index ["group_id"], name: "index_group_users_on_group_id", using: :btree
     t.index ["user_id"], name: "index_group_users_on_user_id", using: :btree
   end
@@ -43,6 +46,8 @@ ActiveRecord::Schema.define(version: 20181010135602) do
     t.text     "description"
     t.string   "why_receiving"
     t.boolean  "automatic_update", default: true
+    t.boolean  "joinable",         default: true
+    t.boolean  "leavable",         default: true
   end
 
   create_table "mailouts", force: :cascade do |t|

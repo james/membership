@@ -18,4 +18,14 @@
 @import "bootstrap-datepicker3";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import "rails_bootstrap_forms"
+@import "rails_bootstrap_forms";
+
+.nested-fields {
+  position: relative;
+  padding: 15px 15px 15px;
+  margin: 0 -15px 15px;
+  border-width: 1px;
+  border-color: grey;
+  border-radius: 4px 4px 0 0;
+  border-style: solid;
+}

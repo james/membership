@@ -1,13 +1,24 @@
 <h1><%= @group.name %></h1>
 
-<%= @group.people.count %>
+<p><%= pluralize @group.people.count, "Member" %></p>
 
-<h2>Emails:</h2>
+<%= simple_format @group.description %>
 
-<ul>
-  <% @group.mailouts.each do |mailout| %>
-    <li><%= link_to mailout.subject, group_mailout_path(@group, mailout) %></li>
-  <% end %>
-</ul>
+<h2>Leadership team</h2>
+<% @group.group_users.each do |group_user| %>
+  <%= group_user.person.full_name %>: <%= group_user.role %>
+<% end %>
 
-<%= link_to "New email", new_group_mailout_path(@group) %>
+<% if current_user.admin? %>
+  <h2>Emails:</h2>
+
+  <ul>
+    <% @group.mailouts.each do |mailout| %>
+      <li>
+        <%= link_to mailout.subject, group_mailout_path(@group, mailout) %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to "New email", new_group_mailout_path(@group) %>
+<% end %>

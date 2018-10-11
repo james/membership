@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
   has_many :group_users
+  accepts_nested_attributes_for :group_users, reject_if: :all_blank, allow_destroy: true
   has_many :users, through: :group_users
   has_many :group_memberships, dependent: :destroy
   has_many :people, through: :group_memberships
@@ -13,6 +14,8 @@ class Group < ApplicationRecord
   end
 
   def update_memberships
-    self.people = people_by_filter
+    if filter?
+      self.people = people_by_filter
+    end
   end
 end
