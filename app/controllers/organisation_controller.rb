@@ -9,6 +9,7 @@ class OrganisationController < ApplicationController
   def create_admin
     @user = User.new(admin_params)
     @user.role = 'admin'
+    @user.confirmed_at = Time.now
     if @user.save!
       sign_in(@user)
       redirect_to setup_organisation_path

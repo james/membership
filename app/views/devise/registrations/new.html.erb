@@ -4,13 +4,6 @@
   <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   <%= f.password_field :password, autocomplete: "new-password" %>
   <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-
-  <%= f.fields_for :person do |person_form| %>
-    <%= person_form.text_field :first_name %>
-    <%= person_form.text_field :last_name %>
-    <%= person_form.text_field :phone %>
-  <% end %>
-
   <%= f.submit "Sign up" %>
 <% end %>
 

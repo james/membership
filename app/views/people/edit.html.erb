@@ -1,0 +1,10 @@
+<% if params[:post_confirmation] && current_user.created_at > @person.created_at %>
+  <p>You are already a member.</p>
+<% end %>
+
+<%= bootstrap_form_for @person do |form| %>
+  <%= form.text_field :first_name %>
+  <%= form.text_field :last_name %>
+  <%= form.text_field :phone %>
+  <%= form.submit "Save details" %>
+<% end %>

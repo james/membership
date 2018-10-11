@@ -23,7 +23,10 @@ Rails.application.routes.draw do
         get :setup
       end
     end
-    devise_for :users, controllers: { registrations: 'users/registrations' }
+    devise_for :users, controllers: {
+      registrations: 'users/registrations',
+      confirmations: 'users/confirmations',
+    }
     resources :people
     resources :groups do
       resources :group_users
@@ -33,6 +36,7 @@ Rails.application.routes.draw do
         end
       end
     end
+    get '/confirmation_needed', to: 'pages#confirmation_needed'
     root 'people#index'
   end
 end

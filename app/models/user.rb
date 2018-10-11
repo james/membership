@@ -4,12 +4,12 @@ class User < ApplicationRecord
   has_many :group_memberships, through: :groups
   has_many :people, through: :group_memberships
   belongs_to :person
-  accepts_nested_attributes_for :person
+  before_create :find_or_create_person
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   def admin?
     role == 'admin'
@@ -29,5 +29,10 @@ class User < ApplicationRecord
     else
       groups
     end
+  end
+
+  private
+  def find_or_create_person
+    self.person = Person.find_or_create_by(email_address: self.email)
   end
 end
