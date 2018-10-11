@@ -1,5 +1,6 @@
 class OrganisationsController < ApplicationController
   skip_before_action :authenticate_user!
+  layout 'public_site'
 
   def new
     @organisation = Organisation.new

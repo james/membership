@@ -1,5 +1,7 @@
 <h1>Welcome to <%= @organisation.name %></h1>
 
+<p>You've created the organisation. Before we can do anything else, we need to create you and admin account.</p>
+
 <%= bootstrap_form_for @user, url: create_admin_organisation_path do |form| %>
   <%= form.email_field :email %>
   <%= form.password_field :password %>
