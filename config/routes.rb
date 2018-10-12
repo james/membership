@@ -38,6 +38,6 @@ Rails.application.routes.draw do
       end
     end
     get '/confirmation_needed', to: 'pages#confirmation_needed'
-    root 'people#index'
+    root 'groups#index'
   end
 end

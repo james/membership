@@ -39,6 +39,14 @@ class User < ApplicationRecord
     !!membership_for(group)
   end
 
+  def name_or_email
+    if person.present? && person.full_name.present?
+      person.full_name
+    else
+      email
+    end
+  end
+
   private
   def find_or_create_person
     self.person = Person.find_or_create_by(email_address: self.email)

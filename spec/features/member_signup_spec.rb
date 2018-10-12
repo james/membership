@@ -27,7 +27,6 @@ RSpec.feature "Registering a new organisation", :type => :feature do
     click_button 'Sign up'
     expect(page).to have_content('We have emailed you a confirmation email')
     visit('/users/confirmation?confirmation_token=' + User.last.confirmation_token)
-    expect(page).to have_content('member@example.com')
     expect(page).to have_content('Member Smith')
     expect(page).to have_content('You are already a member.')
   end
