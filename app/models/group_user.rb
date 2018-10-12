@@ -2,7 +2,7 @@ class GroupUser < ApplicationRecord
   belongs_to :group
   belongs_to :user
 
-  def person
-    user.person
+  def member
+    user.member
   end
 end

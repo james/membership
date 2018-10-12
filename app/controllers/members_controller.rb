@@ -1,32 +1,32 @@
-class PeopleController < ApplicationController
+class MembersController < ApplicationController
   def index
     @filterrific = initialize_filterrific(
-      current_user.viewable_people,
+      current_user.viewable_members,
       params[:filterrific]
     ) or return
-    @people = @filterrific.find
+    @members = @filterrific.find
 
     respond_to do |format|
       format.html do
-        @people = @people.page(params[:page]).per(10)
+        @members = @members.page(params[:page]).per(10)
       end
       format.json do
-        render json: @people.to_json
+        render json: @members.to_json
       end
     end
   end
 
   def show
-    @person = current_user.viewable_people.find(params[:id])
+    @member = current_user.viewable_members.find(params[:id])
   end
 
   def edit
-    @person = current_user.person
+    @member = current_user.member
   end
 
   def update
-    @person = current_user.person
-    if @person.update_attributes(person_params)
+    @member = current_user.member
+    if @member.update_attributes(member_params)
       redirect_to '/'
     else
       render action: :edit
@@ -35,8 +35,8 @@ class PeopleController < ApplicationController
 
   private
 
-  def person_params
-    params.require(:person).permit(
+  def member_params
+    params.require(:member).permit(
       :first_name,
       :last_name,
       :phone,

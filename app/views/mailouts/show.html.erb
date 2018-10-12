@@ -6,6 +6,6 @@
   This email has been sent
 <% else %>
   <%= form_for [@group, @mailout], url: send_email_group_mailout_path(@group, @mailout) do |form| %>
-    <%= form.submit "Send to #{@group.group_memberships.count} people" %>
+    <%= form.submit "Send to #{@group.group_memberships.count} members" %>
   <% end %>
 <% end %>

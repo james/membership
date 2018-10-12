@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181011220900) do
+ActiveRecord::Schema.define(version: 20181012155037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20181011220900) do
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "group_id"
-    t.integer  "person_id"
+    t.integer  "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_group_memberships_on_group_id", using: :btree
-    t.index ["person_id"], name: "index_group_memberships_on_person_id", using: :btree
+    t.index ["member_id"], name: "index_group_memberships_on_member_id", using: :btree
   end
 
   create_table "group_users", force: :cascade do |t|
@@ -65,14 +65,7 @@ ActiveRecord::Schema.define(version: 20181011220900) do
     t.index ["user_id"], name: "index_mailouts_on_user_id", using: :btree
   end
 
-  create_table "organisations", force: :cascade do |t|
-    t.string   "name"
-    t.string   "subdomain"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "people", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
     t.string    "first_name"
     t.string    "last_name"
     t.string    "email_address"
@@ -103,6 +96,13 @@ ActiveRecord::Schema.define(version: 20181011220900) do
     t.string    "paypal_id"
   end
 
+  create_table "organisations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "subdomain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -117,22 +117,22 @@ ActiveRecord::Schema.define(version: 20181011220900) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "role"
-    t.integer  "person_id"
+    t.integer  "member_id"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["person_id"], name: "index_users_on_person_id", using: :btree
+    t.index ["member_id"], name: "index_users_on_member_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "group_memberships", "groups"
-  add_foreign_key "group_memberships", "people"
+  add_foreign_key "group_memberships", "members"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "mailouts", "groups"
   add_foreign_key "mailouts", "users"
-  add_foreign_key "users", "people"
+  add_foreign_key "users", "members"
 end

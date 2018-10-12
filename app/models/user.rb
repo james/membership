@@ -2,9 +2,9 @@ class User < ApplicationRecord
   has_many :group_users
   has_many :groups, through: :group_users
   has_many :group_memberships, through: :groups
-  has_many :people, through: :group_memberships
-  belongs_to :person
-  before_create :find_or_create_person
+  has_many :members, through: :group_memberships
+  belongs_to :member
+  before_create :find_or_create_member
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
@@ -15,11 +15,11 @@ class User < ApplicationRecord
     role == 'admin'
   end
 
-  def viewable_people
+  def viewable_members
     if admin?
-      Person.all
+      Member.all
     else
-      people
+      members
     end
   end
 
@@ -32,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def membership_for(group)
-    self.person.group_memberships.where(group: group).first
+    self.member.group_memberships.where(group: group).first
   end
 
   def member_of?(group)
@@ -40,15 +40,15 @@ class User < ApplicationRecord
   end
 
   def name_or_email
-    if person.present? && person.full_name.present?
-      person.full_name
+    if member.present? && member.full_name.present?
+      member.full_name
     else
       email
     end
   end
 
   private
-  def find_or_create_person
-    self.person = Person.find_or_create_by(email_address: self.email)
+  def find_or_create_member
+    self.member = Member.find_or_create_by(email_address: self.email)
   end
 end

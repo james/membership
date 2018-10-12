@@ -1,4 +1,4 @@
-class Person < ApplicationRecord
+class Member < ApplicationRecord
   has_many :group_memberships, dependent: :destroy
   has_many :groups, through: :group_memberships
   has_one :user

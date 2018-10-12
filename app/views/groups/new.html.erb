@@ -1,7 +1,7 @@
 <h2>
   Create a new group
   <% if @group.filter? %>
-    with <%= @group.people_by_filter.count %> people in it
+    with <%= @group.members_by_filter.count %> members in it
   <% end %>
 </h2>
 

@@ -8,7 +8,7 @@ RSpec.feature "Filtering", :type => :feature do
 
   scenario "Trying to view profile" do
     assert_raises(ActiveRecord::RecordNotFound) do
-      visit person_path(@sarah)
+      visit member_path(@sarah)
     end
   end
 

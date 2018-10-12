@@ -45,7 +45,7 @@
   </div>
 
   <div class="col-md-8">
-    <h3><%= @people.total_count %> people found</h3>
+    <h3><%= @members.total_count %> members found</h3>
     <table class="table table-striped table-hover table-condensed">
       <tr>
         <th>ID</th>
@@ -53,15 +53,15 @@
         <th>Last Name</th>
         <th></th>
       </tr>
-      <% @people.each do |person| %>
+      <% @members.each do |member| %>
         <tr>
-          <td><%= person.id %></td>
-          <td><%= person.first_name %></td>
-          <td><%= person.last_name %></td>
-          <td><%= link_to "View", person_path(person) %></td>
+          <td><%= member.id %></td>
+          <td><%= member.first_name %></td>
+          <td><%= member.last_name %></td>
+          <td><%= link_to "View", member_path(member) %></td>
         </tr>
       <% end %>
     </table>
-    <%= paginate @people %>
+    <%= paginate @members %>
   </div>
 </div>

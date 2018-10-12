@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   # def new
   #   super do |user|
-  #     user.person = Person.new
+  #     user.member = Member.new
   #   end
   # end
 
@@ -47,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.permit(:sign_up) do |user|
   #     user.permit(
   #       :email, :password, :password_confirmation,
-  #       person_attributes: [:first_name, :last_name, :phone]
+  #       member_attributes: [:first_name, :last_name, :phone]
   #     )
   #   end
   # end

@@ -1,6 +1,6 @@
 <h1><%= @group.name %></h1>
 
-<p><%= pluralize @group.people.count, "Member" %></p>
+<p><%= pluralize @group.members.count, "Member" %></p>
 
 <%= simple_format @group.description %>
 
@@ -20,7 +20,7 @@
 
 <h2>Leadership team</h2>
 <% @group.group_users.each do |group_user| %>
-  <%= group_user.person.full_name %>: <%= group_user.role %>
+  <%= group_user.member.full_name %>: <%= group_user.role %>
 <% end %>
 
 <% if current_user.admin? %>

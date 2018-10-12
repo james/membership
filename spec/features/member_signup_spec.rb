@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Registering a new organisation", :type => :feature do
-  scenario "successfully when person not in DB" do
+  scenario "successfully when member not in DB" do
     visit '/users/sign_up'
     fill_in 'Email', with: 'member@example.com'
     fill_in 'Password', with: 'password'
@@ -18,8 +18,8 @@ RSpec.feature "Registering a new organisation", :type => :feature do
     expect(page).to have_content('Member Smith')
   end
 
-  scenario "successfully when person already in DB" do
-    Person.create!(email_address: 'member@example.com', first_name: 'Member', last_name: 'Smith', phone: '0777')
+  scenario "successfully when member already in DB" do
+    Member.create!(email_address: 'member@example.com', first_name: 'Member', last_name: 'Smith', phone: '0777')
     visit '/users/sign_up'
     fill_in 'Email', with: 'member@example.com'
     fill_in 'Password', with: 'password'

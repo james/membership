@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       registrations: 'users/registrations',
       confirmations: 'users/confirmations',
     }
-    resources :people
+    resources :members
     resources :groups do
       resources :group_users
       resources :group_memberships

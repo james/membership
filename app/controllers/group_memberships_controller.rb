@@ -2,13 +2,13 @@ class GroupMembershipsController < ApplicationController
   before_action :find_group
 
   def create
-    @group.group_memberships.create!(person: current_user.person)
+    @group.group_memberships.create!(member: current_user.member)
     flash[:notice] = "You are now a member of #{@group.name}"
     redirect_to group_path(@group)
   end
 
   def destroy
-    @group_membership = @group.group_memberships.where(person: current_user.person).first
+    @group_membership = @group.group_memberships.where(member: current_user.member).first
     @group_membership.destroy
     flash[:notice] = "You have left #{@group.name}"
     redirect_to group_path(@group)

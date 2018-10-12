@@ -8,8 +8,8 @@ class Mailout < ApplicationRecord
     mb_obj.set_from_address(self.from_email, {"first"=>"James", "last" => "Darling"})
     mb_obj.set_subject(self.subject)
     mb_obj.set_text_body(self.body)
-    self.group.people.each do |person|
-      mb_obj.add_recipient(:to, person.email_address, {"first_name" => person.first_name, "last_name" => person.last_name})
+    self.group.members.each do |member|
+      mb_obj.add_recipient(:to, member.email_address, {"first_name" => member.first_name, "last_name" => member.last_name})
     end
     response = mb_obj.finalize
     self.mailgun_id = response.keys.first

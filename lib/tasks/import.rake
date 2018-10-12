@@ -1,8 +1,8 @@
 task :import => :environment do
   GroupMembership.delete_all
-  Person.delete_all
+  Member.delete_all
   Nationbuilder::Signup.find_each do |signup|
-    person = Person.new
+    member = Member.new
     [
       "first_name",
       "last_name",
@@ -21,17 +21,17 @@ task :import => :environment do
       "updated_at"
     ].each do |att|
       if att.is_a?(Array)
-        person.send("#{att[1]}=", signup.send(att[0]))
+        member.send("#{att[1]}=", signup.send(att[0]))
       else
-        person.send("#{att}=", signup.send(att))
+        member.send("#{att}=", signup.send(att))
       end
     end
 
     ## Add nationbuiler custom values you want to import below
-    # person.membership_id = signup.custom_values["membership_number"]
-    # person.membership_started_at = Time.at(signup.custom_values["joined_date"].to_i) if signup.custom_values["joined_date"]
-    # person.membership_level = signup.custom_values["membership_type"]
-    # person.paypal_id = signup.custom_values["paypal_id"]
+    # member.membership_id = signup.custom_values["membership_number"]
+    # member.membership_started_at = Time.at(signup.custom_values["joined_date"].to_i) if signup.custom_values["joined_date"]
+    # member.membership_level = signup.custom_values["membership_type"]
+    # member.paypal_id = signup.custom_values["paypal_id"]
 
     if signup.address
       [
@@ -45,16 +45,16 @@ task :import => :environment do
         "lng"
       ].each do |att|
         if att.is_a?(Array)
-          person.send("#{att[1]}=", signup.address.send(att[0]))
+          member.send("#{att[1]}=", signup.address.send(att[0]))
         else
-          person.send("#{att}=", signup.address.send(att))
+          member.send("#{att}=", signup.address.send(att))
         end
       end
-      person.lonlat = "POINT(#{signup.address.lng} #{signup.address.lat})"
+      member.lonlat = "POINT(#{signup.address.lng} #{signup.address.lat})"
     end
 
-    person.save!
-    p "#{person.id}: #{person.first_name} #{person.last_name}"
+    member.save!
+    p "#{member.id}: #{member.first_name} #{member.last_name}"
   end
 end
 
@@ -63,10 +63,10 @@ task :import_fake => :environment do
   addresses = CSV.read("lib/tasks/addresses.csv").to_a
   Faker::Config.locale = 'en-GB'
   GroupMembership.delete_all
-  Person.delete_all
+  Member.delete_all
   10000.times do
     address = addresses.sample
-    Person.create!(
+    Member.create!(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email_address: Faker::Internet.email,

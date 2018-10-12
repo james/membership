@@ -3,19 +3,19 @@ class Group < ApplicationRecord
   accepts_nested_attributes_for :group_users, reject_if: :all_blank, allow_destroy: true
   has_many :users, through: :group_users
   has_many :group_memberships, dependent: :destroy
-  has_many :people, through: :group_memberships
+  has_many :members, through: :group_memberships
   has_many :mailouts
 
-  def people_by_filter
-    Person.filterrific_find(self.filter_params)
+  def members_by_filter
+    Member.filterrific_find(self.filter_params)
   end
   def filter_params
-    Filterrific::ParamSet.new(Person, JSON.parse(self.filter))
+    Filterrific::ParamSet.new(Member, JSON.parse(self.filter))
   end
 
   def update_memberships
     if filter?
-      self.people = people_by_filter
+      self.members = members_by_filter
     end
   end
 end
