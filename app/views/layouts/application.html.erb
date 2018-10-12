@@ -19,7 +19,6 @@
 
         <ul class="nav navbar-nav">
           <li><%= link_to "Groups", groups_path %></li>
-          <li><%= link_to "People", people_path %></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -36,6 +35,21 @@
         </ul>
       </div>
     </nav>
+
+    <% if current_user && current_user.admin? %>
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <span class="navbar-brand">
+              Admin:
+            </span>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "People", people_path %></li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
 
     <div class="container">
       <p class="notice"><%= notice %></p>

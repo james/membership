@@ -12,12 +12,6 @@ RSpec.feature "Filtering", :type => :feature do
     end
   end
 
-  scenario "Trying to view group" do
-    assert_raises(ActiveRecord::RecordNotFound) do
-      visit group_path(Group.create!)
-    end
-  end
-
   scenario "Trying to create new group" do
     visit new_group_path
     expect(page.status_code).to eq(403)

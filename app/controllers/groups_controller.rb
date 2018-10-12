@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   before_action :authenticate_admin, only: [:new, :create]
 
   def index
-    @groups = current_user.viewable_groups
+    @user_groups = current_user.groups
+    @groups = current_user.viewable_groups_excluding_joined
   end
   def show
     @group = current_user.viewable_groups.find(params[:id])

@@ -4,6 +4,20 @@
 
 <%= simple_format @group.description %>
 
+<% if current_user.member_of?(@group) %>
+  <% if @group.leavable? %>
+    <%= form_for [@group, current_user.membership_for(@group)], method: :delete do |form| %>
+      <%= form.submit "Leave" %>
+    <% end %>
+  <% end %>
+<% else %>
+  <% if @group.joinable? %>
+    <%= form_for [@group, GroupMembership.new] do |form| %>
+      <%= form.submit "Join" %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <h2>Leadership team</h2>
 <% @group.group_users.each do |group_user| %>
   <%= group_user.person.full_name %>: <%= group_user.role %>

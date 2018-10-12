@@ -1,13 +1,23 @@
-<table class="table">
-  <% @groups.each do |group| %>
-    <tr>
-      <td><%= group.name %></td>
-      <td><%= pluralize(group.people.count, "person") %></td>
-      <% if current_user.admin? %>
-        <td><%= link_to pluralize(group.group_users.count, "Role Holder"), group_group_users_path(group) %>
-      <% end %>
-      <td><%= link_to "View", group_path(group) %>
-      <td><%= link_to "Edit", edit_group_path(group) %>
-    </tr>
-  <% end %>
-</table>
+<h2>Your groups</h2>
+<% @user_groups.each do |group| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to group.name, group_path(group) %></h3>
+    </div>
+    <div class="panel-body">
+      <%= group.description %>
+    </div>
+  </div>
+<% end %>
+
+<h2>Other groups</h2>
+<% @groups.each do |group| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to group.name, group_path(group) %></h3>
+    </div>
+    <div class="panel-body">
+      <%= group.description %>
+    </div>
+  </div>
+<% end %>

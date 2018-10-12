@@ -24,11 +24,19 @@ class User < ApplicationRecord
   end
 
   def viewable_groups
-    if admin?
-      Group.all
-    else
-      groups
-    end
+    Group.all
+  end
+
+  def viewable_groups_excluding_joined
+    viewable_groups - groups
+  end
+
+  def membership_for(group)
+    self.person.group_memberships.where(group: group).first
+  end
+
+  def member_of?(group)
+    !!membership_for(group)
   end
 
   private

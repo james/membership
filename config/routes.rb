@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :people
     resources :groups do
       resources :group_users
+      resources :group_memberships
       resources :mailouts do
         member do
           patch :send_email
