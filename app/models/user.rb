@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def viewable_groups_excluding_joined
-    viewable_groups - groups
+    viewable_groups - member.groups
   end
 
   def membership_for(group)
