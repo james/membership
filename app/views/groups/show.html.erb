@@ -24,6 +24,10 @@
 <% end %>
 
 <% if current_user.admin? %>
+  <%= link_to "Manage members", group_group_memberships_path(@group) %>
+<% end %>
+
+<% if current_user.admin? %>
   <h2>Emails:</h2>
 
   <ul>

@@ -1,0 +1,23 @@
+<table class="table table-striped table-hover table-condensed group_members">
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @memberships.each do |membership| %>
+    <tr>
+      <td><%= membership.member.id %></td>
+      <td><%= membership.member.first_name %></td>
+      <td><%= membership.member.last_name %></td>
+      <td><%= link_to "View", member_path(membership.member) %></td>
+      <td><%= link_to "Remove", group_group_membership_path(@group, membership), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= bootstrap_form_for [@group, GroupMembership.new] do |form| %>
+  <%= form.select :member_id, @addable_members.collect {|m| [m.full_name, m.id]}, label: 'Add a member' %>
+  <%= form.submit 'Add' %>
+<% end %>
