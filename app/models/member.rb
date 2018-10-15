@@ -33,7 +33,7 @@ class Member < ApplicationRecord
   }
 
   scope :with_account, -> {
-    where(id: User.select(:member_id).uniq)
+    where(id: User.select(:member_id).distinct)
   }
 
   def full_name
