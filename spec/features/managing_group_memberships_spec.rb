@@ -47,10 +47,13 @@ RSpec.feature "Managing group memberships", :type => :feature do
   end
 
   scenario "as member" do
-    sign_in_as("roleholder@abscond.org")
+    sign_in_as("james@abscond.org")
     visit group_path(@group1)
     expect(page).to_not have_link('Manage members')
+    expect(page).to_not have_link('Remove')
     visit group_group_memberships_path(@group1)
+    expect(page.status_code).to eq(403)
+    visit edit_group_group_membership_path(@group1, @james1)
     expect(page.status_code).to eq(403)
   end
 

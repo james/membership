@@ -26,4 +26,20 @@ RSpec.feature "Filtering", :type => :feature do
       expect(page).to_not have_text("Jon")
     end
   end
+
+  context "as member" do
+    before do
+      sign_in_as("james@abscond.org")
+    end
+
+    scenario "Trying to view profile" do
+      visit member_path(@sarah)
+      expect(page.status_code).to eq(403)
+    end
+
+    scenario "Trying to create new group" do
+      visit new_group_path
+      expect(page.status_code).to eq(403)
+    end
+  end
 end
