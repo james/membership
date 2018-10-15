@@ -24,11 +24,24 @@ RSpec.feature "Managing group memberships", :type => :feature do
         expect(page).to have_content('Smith')
       end
     end
-
     scenario "can remove member" do
       click_link 'Remove'
       within('.group_members') do
         expect(page).to_not have_content('Darling')
+      end
+    end
+    scenario "can make member a roleholder" do
+      within('.group_members') do
+        click_link 'Make roleholder'
+      end
+      check 'Is roleholder'
+      fill_in 'Role name', with: 'Chair'
+      check 'Can manage members'
+      check 'Is public'
+      check 'Can manage group'
+      click_button 'Save'
+      within('.group_members') do
+        expect(page).to have_content('Chair')
       end
     end
   end

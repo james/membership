@@ -1,0 +1,43 @@
+<%= form_for [@group, @group_membership] do |f| %>
+  <div class="form-group">
+    <%= f.check_box :roleholder %>
+    <%= f.label :roleholder, 'Is roleholder' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :role_name %>
+    <%= f.text_field :role_name, class: 'form-control' %>
+    <p class="help-block">
+      The name of their role, eg: "Leader" or "Chairperson"
+    </p>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :can_manage_members %>
+    <%= f.label :can_manage_members %>
+    <p class="help-block">
+      Can this member see the personal information of all members in this group?
+      They will also be able to add and remove members.
+    </p>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :is_public %>
+    <%= f.label :is_public %>
+    <p class="help-block">
+      Can all members of the organisation see that this role exists?.
+      Members of the group can see all roles.
+    </p>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :can_manage_group %>
+    <%= f.label :can_manage_group %>
+    <p class="help-block">
+      Can this member edit the details of this group, including adding and
+      removing other roles, the group name and description.
+    </p>
+  </div>
+
+  <%= f.submit 'Save' %>
+<% end %>

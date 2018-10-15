@@ -5,6 +5,7 @@
     <th>Last Name</th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
   <% @memberships.each do |membership| %>
     <tr>
@@ -12,6 +13,13 @@
       <td><%= membership.member.first_name %></td>
       <td><%= membership.member.last_name %></td>
       <td><%= link_to "View", member_path(membership.member) %></td>
+      <td>
+        <% if membership.roleholder? %>
+          <%= link_to membership.role_name, edit_group_group_membership_path(@group, membership) %>
+        <% else %>
+          <%= link_to "Make roleholder", edit_group_group_membership_path(@group, membership) %>
+        <% end %>
+      </td>
       <td><%= link_to "Remove", group_group_membership_path(@group, membership), method: :delete %></td>
     </tr>
   <% end %>

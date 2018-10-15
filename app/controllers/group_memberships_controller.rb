@@ -1,10 +1,20 @@
 class GroupMembershipsController < ApplicationController
   before_action :find_group
-  before_action :authenticate_admin, only: [:index]
+  before_action :authenticate_admin, only: [:index, :edit, :update]
 
   def index
     @memberships = @group.group_memberships
     @addable_members = Member.all - @group.members
+  end
+
+  def edit
+    @group_membership = @group.group_memberships.find(params[:id])
+  end
+
+  def update
+    @group_membership = @group.group_memberships.find(params[:id])
+    @group_membership.update_attributes(group_member_params)
+    redirect_to group_group_memberships_path(@group)
   end
 
   def create
@@ -37,6 +47,13 @@ class GroupMembershipsController < ApplicationController
   end
 
   def group_member_params
-    params.require(:group_membership).permit(:member_id)
+    params.require(:group_membership).permit(
+      :member_id,
+      :roleholder,
+      :role_name,
+      :can_manage_members,
+      :is_public,
+      :can_manage_group,
+    )
   end
 end
