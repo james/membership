@@ -29,7 +29,6 @@ Rails.application.routes.draw do
     }
     resources :members
     resources :groups do
-      resources :group_users
       resources :group_memberships
       resources :mailouts do
         member do

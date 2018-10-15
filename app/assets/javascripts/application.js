@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
-//= require cocoon
 //= require_tree .
 
 $(document).ready(function(){

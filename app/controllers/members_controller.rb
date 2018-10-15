@@ -1,7 +1,9 @@
 class MembersController < ApplicationController
+  before_action :authenticate_admin, only: [:index, :show]
+
   def index
     @filterrific = initialize_filterrific(
-      current_user.viewable_members,
+      Member.all,
       params[:filterrific]
     ) or return
     @members = @filterrific.find
@@ -17,7 +19,7 @@ class MembersController < ApplicationController
   end
 
   def show
-    @member = current_user.viewable_members.find(params[:id])
+    @member = Member.find(params[:id])
   end
 
   def edit

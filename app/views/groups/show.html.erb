@@ -18,13 +18,13 @@
   <% end %>
 <% end %>
 
-<h2>Leadership team</h2>
-<% @group.group_users.each do |group_user| %>
-  <%= group_user.member.full_name %>: <%= group_user.role %>
+<% if current_user.admin? %>
+  <p><%= link_to "Manage members", group_group_memberships_path(@group) %></p>
 <% end %>
 
-<% if current_user.admin? %>
-  <%= link_to "Manage members", group_group_memberships_path(@group) %>
+<h2>Leadership team</h2>
+<% @group.roleholder_memberships.each do |membership| %>
+  <%= membership.member.full_name %>: <%= membership.role_name %>
 <% end %>
 
 <% if current_user.admin? %>

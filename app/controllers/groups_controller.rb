@@ -10,7 +10,6 @@ class GroupsController < ApplicationController
   end
   def new
     @group = Group.new(filter: params[:filter])
-    @group.users << current_user
   end
   def create
     @group = Group.new(group_params)
@@ -43,13 +42,6 @@ class GroupsController < ApplicationController
       :automatic_update,
       :joinable,
       :leavable,
-      group_users_attributes: [
-        :user_id,
-        :role,
-        :can_manage_members,
-        :is_public,
-        :can_manage_group,
-      ],
     ]
     if current_user.admin?
       permitted_attrs << :filter

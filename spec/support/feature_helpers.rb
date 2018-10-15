@@ -15,6 +15,6 @@ def create_fixtures
   @james2 = Member.create!(first_name: 'James', last_name: 'Smith')
   @sarah = Member.create!(first_name: 'Sarah')
   @jon = Member.create!(first_name: 'Jon')
-  @group1 = Group.create!(members: [@james1], users: [@roleholder])
-  @group2 = Group.create!(members: [@james1, @jon], users: [@roleholder])
+  @group1 = Group.create!(members: [@james1])
+  @group2 = Group.create!(members: [@james1, @jon])
 end

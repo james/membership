@@ -7,18 +7,12 @@ RSpec.feature "Filtering", :type => :feature do
   end
 
   scenario "Trying to view profile" do
-    assert_raises(ActiveRecord::RecordNotFound) do
-      visit member_path(@sarah)
-    end
+    visit member_path(@sarah)
+    expect(page.status_code).to eq(403)
   end
 
   scenario "Trying to create new group" do
     visit new_group_path
-    expect(page.status_code).to eq(403)
-  end
-
-  scenario "Trying to view group users" do
-    visit group_group_users_path(Group.create!)
     expect(page.status_code).to eq(403)
   end
 end

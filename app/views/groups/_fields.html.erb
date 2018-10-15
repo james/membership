@@ -40,17 +40,3 @@
     <%= form.check_box :automatic_update, class: 'form-control', checked: true, disabled: true %>
   </div>
 <% end %>
-
-<div class="group_users">
-  <h4>Roles</h4>
-  <p>
-    Each group should have at least one leader.
-    For example, a chairperson or secretary.
-  </p>
-  <%= form.fields_for :group_users do |group_user| %>
-    <%= render 'group_user_fields', f: group_user %>
-  <% end %>
-  <div class="links">
-    <%= link_to_add_association 'add another role', form, :group_users %>
-  </div>
-</div>

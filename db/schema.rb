@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015171934) do
+ActiveRecord::Schema.define(version: 20181015204052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,19 +28,6 @@ ActiveRecord::Schema.define(version: 20181015171934) do
     t.boolean  "can_manage_group",   default: false
     t.index ["group_id"], name: "index_group_memberships_on_group_id", using: :btree
     t.index ["member_id"], name: "index_group_memberships_on_member_id", using: :btree
-  end
-
-  create_table "group_users", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.string   "role"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "can_manage_members", default: true
-    t.boolean  "is_public",          default: true
-    t.boolean  "can_manage_group",   default: true
-    t.index ["group_id"], name: "index_group_users_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_group_users_on_user_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -135,8 +122,6 @@ ActiveRecord::Schema.define(version: 20181015171934) do
 
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "members"
-  add_foreign_key "group_users", "groups"
-  add_foreign_key "group_users", "users"
   add_foreign_key "mailouts", "groups"
   add_foreign_key "mailouts", "users"
   add_foreign_key "users", "members"
