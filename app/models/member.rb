@@ -32,6 +32,10 @@ class Member < ApplicationRecord
     end
   }
 
+  scope :with_account, -> {
+    where(id: User.select(:member_id).uniq)
+  }
+
   def full_name
     "#{first_name} #{last_name}"
   end
