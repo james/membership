@@ -1,6 +1,7 @@
 class GroupMembershipsController < ApplicationController
   before_action :find_group
-  before_action :authenticate_admin, only: [:index, :edit, :update]
+  before_action :authenticate_roleholder, only: [:index]
+  before_action :authenticate_can_manage_members, only: [:edit, :update]
 
   def index
     @memberships = @group.group_memberships
@@ -29,7 +30,7 @@ class GroupMembershipsController < ApplicationController
   end
 
   def destroy
-    if current_user.admin?
+    if current_user.can_manage_members_of?(@group)
       @group_membership = @group.group_memberships.find(params[:id])
       @group_membership.destroy
       redirect_to group_group_memberships_path(@group)
@@ -44,6 +45,18 @@ class GroupMembershipsController < ApplicationController
   private
   def find_group
     @group = Group.find(params[:group_id])
+  end
+
+  def authenticate_roleholder
+    unless current_user.is_roleholder_of?(@group)
+      render template: 'shared/not_permitted', status: :forbidden and return
+    end
+  end
+
+  def authenticate_can_manage_members
+    unless current_user.can_manage_members_of?(@group)
+      render template: 'shared/not_permitted', status: :forbidden and return
+    end
   end
 
   def group_member_params

@@ -13,6 +13,7 @@ def create_fixtures
   @james2 = create(:member, first_name: 'James', last_name: 'Smith')
   @sarah = create(:member, first_name: 'Sarah')
   @jon = create(:member, first_name: 'Jon')
-  @group1 = Group.create!(members: [@james1])
-  @group2 = Group.create!(members: [@james1, @jon])
+  @group1 = Group.create!(members: [])
+  @group2 = Group.create!(members: [@jon, @james1])
+  @priveleged_roleholding = create(:group_membership, member: @james1, group: @group1, roleholder: true, role_name: 'Chair', can_manage_members: true, is_public: true, can_manage_group: true)
 end

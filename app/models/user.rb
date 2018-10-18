@@ -37,6 +37,14 @@ class User < ApplicationRecord
     end
   end
 
+  def can_manage_members_of?(group)
+    admin? || (membership_for(group) && membership_for(group).can_manage_members?)
+  end
+
+  def is_roleholder_of?(group)
+    admin? || (membership_for(group) && membership_for(group).roleholder?)
+  end
+
   private
   def find_or_create_member
     self.member = Member.find_or_create_by(email_address: self.email)
